@@ -1,0 +1,21 @@
+Linear Regression :
+
+Mean Squred Error = 4674676612.086951 
+ Root Mean Squred Error = 68371.60676835781 
+ Cross validation Score  = 68507.74859036643
+ 606.6565553024425
+                              
+DecisionTreeRegressor :
+
+Mean Squred Error = 0.0 
+ Root Mean Squred Error = 0.0 
+ Cross validation Score  = 68558.7341311302
+ 1784.4477482241641
+
+Random Forest :
+
+Mean Squred Error = 328103700.9847379 
+ Root Mean Squred Error = 18113.6330145208 
+ Cross validation Score  = 49151.86758727119
+ 1382.1792673115601
+
