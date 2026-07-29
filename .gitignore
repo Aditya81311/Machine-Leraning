@@ -4,3 +4,11 @@
 *.joblib
 /.ipynb_checkpoints
 /.ipynb_checkpoints/
+/Supervised/Plots
+/.env
+/Plots
+Plots
+.ipynb_checkpoints
+/visualizations
+visualizations/
+Text File.txt

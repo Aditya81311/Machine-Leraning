@@ -1,0 +1,115 @@
+PANDAS OPERATIONS CHEAT SHEET
+==============================
+
+1. INSPECTING DATA
+-------------------
+df.head(), df.tail()       # peek
+df.shape                   # (rows, cols)
+df.info()                  # dtypes, nulls, memory
+df.describe()              # stats summary
+df.columns, df.index       # labels
+df.dtypes
+df.isnull().sum()          # nulls per column
+df.nunique()                # unique counts per column
+
+
+2. COLUMN OPERATIONS
+---------------------
+df['col']                  # select one (Series)
+df[['col1','col2']]        # select multiple (DataFrame)
+df['new'] = df['a'] + df['b']     # create/derive
+df.drop('col', axis=1)     # remove column
+df.rename(columns={'old':'new'})
+df.columns = [...]         # bulk rename
+df['col'].astype('int64')  # type cast
+df.select_dtypes(include='number')  # filter by dtype
+
+
+3. ROW OPERATIONS
+------------------
+df.iloc[0]                 # by position
+df.loc[5]                  # by label/index
+df.iloc[2:5]                # slice by position
+df.loc[df['age'] > 30]      # boolean filter
+df.drop(index=3)           # remove row
+df.drop_duplicates()
+pd.concat([df1, df2])      # add rows (current API, .append is deprecated)
+df.sample(5)                # random rows
+
+
+4. FILTERING / BOOLEAN INDEXING
+---------------------------------
+df[df['col'] > 10]
+df[(df['a'] > 5) & (df['b'] < 3)]     # AND — must use & with parens
+df[df['col'].isin(['x','y'])]
+df[df['col'].str.contains('abc')]
+df.query('col > 10 and other == "x"')  # cleaner syntax
+
+
+5. HANDLING MISSING DATA
+--------------------------
+df.isnull() / df.notnull()
+df.dropna()                 # drop rows with NaN
+df.dropna(subset=['col'])   # only check specific column
+df.fillna(0)
+df.fillna(df['col'].mean())
+df.interpolate()
+
+
+6. AGGREGATION / GROUPBY
+--------------------------
+df.groupby('col').mean()
+df.groupby('col').agg({'a':'sum', 'b':'mean'})
+df.groupby(['a','b']).size()
+df.pivot_table(values='sales', index='region', columns='month', aggfunc='sum')
+df['col'].value_counts()
+
+
+7. SORTING
+-----------
+df.sort_values('col', ascending=False)
+df.sort_values(['a','b'])
+df.sort_index()
+
+
+8. APPLYING FUNCTIONS
+-----------------------
+df['col'].apply(func)
+df.apply(func, axis=1)      # row-wise
+df['col'].map({'a':1,'b':2})   # value mapping
+df.applymap(func)            # element-wise (deprecated -> df.map in newer pandas)
+
+
+9. MERGING / JOINING / COMBINING
+-----------------------------------
+pd.concat([df1, df2])              # stack rows/cols
+pd.merge(df1, df2, on='id', how='inner')  # SQL-style join
+df1.join(df2, how='left')
+
+
+10. RESHAPING
+---------------
+df.melt(id_vars=['id'], value_vars=['a','b'])   # wide -> long
+df.pivot(index='id', columns='var', values='val')  # long -> wide
+df.T                          # transpose
+df.set_index('col') / df.reset_index()
+
+
+11. WINDOW / TIME-BASED (if you hit time series)
+----------------------------------------------------
+df['col'].rolling(3).mean()
+df['col'].shift(1)
+df['col'].diff()
+df.resample('D').sum()        # needs datetime index
+
+
+12. I/O
+--------
+pd.read_csv() / df.to_csv()
+pd.read_excel() / df.to_excel()
+pd.read_json() / df.to_json()
+
+
+PRIORITY ORDER TO PRACTICE (ML-focused):
+filtering -> groupby/agg -> merge -> apply/map -> reshaping
+These five cover 90% of real data-wrangling work in ML pipelines.

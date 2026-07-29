@@ -1,0 +1,61 @@
+Logistic Regression Training Workflow Summary
+
+1. Sigmoid Function
+   - Input: z = X @ θ
+   - Output: h = probabilities between 0 and 1
+   - Role: Converts raw scores into interpretable probabilities.
+
+2. Gradient Computation
+   - Formula: (1/m) * (X.T @ (h - y))
+   - Output: Gradient vector (one slope per parameter)
+   - Role: Derived from the cost function; tells how each weight should change.
+
+3. Parameter Update
+   - Rule: θ := θ - α * gradient
+   - Role: Updates θ in place; new θ is automatically used in the next iteration.
+
+4. Cost Function (Log Loss)
+   - Formula: -(1/m) * Σ [ y*log(h) + (1-y)*log(1-h) ]
+   - Output: Scalar cost value
+   - Role: Measures total error; appended to cost_history for monitoring convergence.
+   - Not used in updates, only for tracking.
+
+5. Iteration Cycle
+   - Step 1: Compute h with current θ
+   - Step 2: Compute gradient
+   - Step 3: Update θ
+   - Step 4: Compute cost with updated θ
+   - Step 5: Repeat with new θ
+
+6. Final Predictions
+   - After training, use sigmoid(X @ θ_final)
+   - Apply decision boundary (≥ 0.5 → class 1, else class 0)
+
+Key Distinction:
+- Cost function = total error (scalar).
+- Gradient = slope of cost function (vector).
+- Gradient descent uses the gradient to update θ.
+- Cost is tracked for monitoring, not for updates.
+In logistic regression, there are two main components:
+
+Sigmoid function
+
+Takes the linear combination of inputs and weights (
+𝑋
+@
+𝜃
+).
+
+Outputs a probability between 0 and 1.
+
+This probability represents the likelihood of belonging to class 1.
+
+Optimization function (Gradient Descent)
+
+Uses the gradient of the cost function to update the weights (
+𝜃
+).
+
+The goal is to minimize the cost function (log loss), which measures prediction error.
+
+Iteratively improves the model until convergence.
